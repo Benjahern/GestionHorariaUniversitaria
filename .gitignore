@@ -1,0 +1,6 @@
+.claude
+CLAUDE.md
+__pycache__/
+*.pyc
+output/*
+!output/.gitkeep
