@@ -1,0 +1,6 @@
+curso,bloques,alumnos,profesor_id,nombre_profesor,salas_disponibles
+Algoritmos,2,25,1,Juan Perez,"4,5,6,7"
+Bases_de_Datos,2,20,2,Maria Lopez,"4,5,6,7"
+Redes,1,28,3,Carlos Soto,"4,6,7"
+Programacion,2,18,1,Juan Perez,"4,5,6,7"
+Sistemas_Operativos,1,22,3,Carlos Soto,"4,5,6,7"

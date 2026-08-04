@@ -86,7 +86,7 @@ if __name__ == "__main__":
     from resolv import resolver
 
     datos = cargar('instancias/ejemplo.csv')
-    _, _, asignacion = resolver(datos)
+    _, _, asignacion, _ = resolver(datos)
 
     print("\n" + "=" * 60)
     print("VERIFICACIÓN DE LA ASIGNACIÓN")
@@ -95,13 +95,13 @@ if __name__ == "__main__":
     for c, sesiones in sorted(asignacion.items()):
         for (b, r) in sesiones:
             dia, horario = bloque_a_horario(b)
-            print(f"  {c} → Bloque {b} ({dia} {horario}), Sala {r}")
+            print(f"  {c} -> Bloque {b} ({dia} {horario}), Sala {r}")
 
     cumple, errores = verificar(asignacion, datos)
-    print(f"\nResultado: {'✓ FACTIBLE' if cumple else '✗ NO FACTIBLE'}")
+    print(f"\nResultado: {'OK FACTIBLE' if cumple else 'X NO FACTIBLE'}")
     if errores:
         print(f"\nErrores ({len(errores)}):")
         for e in errores:
             print(f"  - {e}")
     else:
-        print("\n✓ Todas las restricciones se cumplen correctamente.")
+        print("\nOK Todas las restricciones se cumplen correctamente.")

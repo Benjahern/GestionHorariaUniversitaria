@@ -1,0 +1,4 @@
+curso,bloques,alumnos,profesor_id,nombre_profesor,salas_disponibles
+Algoritmos,1,20,"1|3","Juan Perez|Carlos Soto","1,2"
+Bases_de_Datos,1,15,1,Juan Perez,"1,2"
+Redes,1,28,2,Maria Lopez,1
