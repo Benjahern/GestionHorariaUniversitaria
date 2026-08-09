@@ -26,13 +26,24 @@ COSTO_BASE = 1.0
 DESPERDICIO_INFACTIBLE = 50.0
 
 
-# Salas por defecto. Para agregar/quitar/editar una sala, modifique este dict.
-# (No se hace en código pensando en flexibilidad a futuro; por ahora es
-# suficiente para la instancia de ejemplo y se puede migrar a un CSV
-# dedicado sin tocar el resto del pipeline.)
+# Salas basadas en la infraestructura real de la USACH (DIINF + Edificio ED).
+# Fuentes:
+# - DIINF: 2 laboratorios de computacion (10 puestos c/u), 1 Lab TIC (20 puestos)
+# - Edificio Innovacion Docente (ED): salas de 30, 60 y 100 estudiantes
+# - EAO: salas genericas del complejo informatico
+#
+# Para agregar/quitar/editar una sala, modifique este dict.
 SALAS = {
-    1: {'nombre': 'INF526', 'capacidad': 30},
-    2: {'nombre': 'INF201', 'capacidad': 25},
+    1: {'nombre': 'INF-Lab1',  'capacidad': 10},   # Lab computacion DIINF
+    2: {'nombre': 'INF-Lab2',  'capacidad': 10},   # Lab computacion DIINF
+    3: {'nombre': 'INF-TIC',   'capacidad': 20},   # Lab TIC DIINF
+    4: {'nombre': 'EAO-101',   'capacidad': 30},   # Sala EAO
+    5: {'nombre': 'EAO-102',   'capacidad': 25},   # Sala EAO
+    6: {'nombre': 'ED-301',    'capacidad': 30},   # Sala ED piso 3
+    7: {'nombre': 'ED-302',    'capacidad': 30},   # Sala ED piso 3
+    8: {'nombre': 'ED-401',    'capacidad': 60},   # Sala ED piso 4
+    9: {'nombre': 'ED-501',    'capacidad': 60},   # Sala ED piso 5
+    10: {'nombre': 'ED-601',   'capacidad': 100},  # Auditorio ED piso 6
 }
 
 

@@ -109,18 +109,38 @@ def cargar(path):
             curso = fila['curso'].strip()
             bloques = int(fila['bloques'])
             alumnos = int(fila['alumnos'])
-            prof_id = int(fila['profesor_id'])
-            nombre_prof = fila['nombre_profesor'].strip()
+            prof_id_raw = fila['profesor_id'].strip()
+            nombre_prof_raw = fila['nombre_profesor'].strip()
             salas_str = fila.get('salas_disponibles')
         except (ValueError, TypeError) as e:
-            raise ValueError(f"Fila {i}: dato mal formado — {e}") from e
+            raise ValueError(f"Fila {i}: dato mal formado - {e}") from e
         except KeyError as e:
-            raise ValueError(f"Fila {i}: columna faltante — {e}") from e
+            raise ValueError(f"Fila {i}: columna faltante - {e}") from e
 
         if not curso:
-            raise ValueError(f"Fila {i}: 'curso' vacío")
+            raise ValueError(f"Fila {i}: 'curso' vacio")
         if bloques < 1:
             raise ValueError(f"Fila {i}: 'bloques' debe ser >= 1")
+
+        # Parsear profesor(es): soporta separador | para multiples profesores
+        # en una misma fila, ej. "1|3" y "Juan Perez|Carlos Soto"
+        if '|' in prof_id_raw or '|' in nombre_prof_raw:
+            try:
+                prof_ids = [int(x.strip()) for x in prof_id_raw.split('|')]
+            except ValueError as e:
+                raise ValueError(
+                    f"Fila {i}: profesor_id mal formado '{prof_id_raw}' - {e}"
+                ) from e
+            prof_nombres = [x.strip() for x in nombre_prof_raw.split('|')]
+            if len(prof_ids) != len(prof_nombres):
+                raise ValueError(
+                    f"Fila {i}: profesor_id tiene {len(prof_ids)} valores "
+                    f"pero nombre_profesor tiene {len(prof_nombres)}. "
+                    f"Deben tener la misma cantidad separados por '|'."
+                )
+            fila_profs = list(zip(prof_ids, prof_nombres))
+        else:
+            fila_profs = [(int(prof_id_raw), nombre_prof_raw)]
 
         salas_set = _parsear_salas_disponibles(salas_str, R)
 
@@ -133,10 +153,8 @@ def cargar(path):
             )
 
         if curso in cursos:
-            # En filas duplicadas del mismo curso solo validamos consistencia
-            # en alumnos, bloques y salas_disponibles. profesor_id y
-            # nombre_profesor pueden cambiar (es la forma de declarar varios
-            # profesores para un mismo curso).
+            # Fila duplicada del mismo curso (formato legacy): validar
+            # consistencia en alumnos, bloques y salas_disponibles.
             prev = cursos[curso]
             if prev['alumnos'] != alumnos:
                 raise ValueError(
@@ -153,26 +171,28 @@ def cargar(path):
                     f"Fila {i}: 'salas_disponibles' inconsistente para "
                     f"'{curso}' ({salas_por_curso[curso]} vs {salas_set})"
                 )
-            if any(p == prof_id for p, _ in profesores_por_curso[curso]):
-                raise ValueError(
-                    f"Fila {i}: profesor_id {prof_id} repetido para '{curso}'. "
-                    f"Cada fila de un mismo curso debe tener un profesor_id "
-                    f"distinto."
-                )
-            profesores_por_curso[curso].append((prof_id, nombre_prof))
+            for pid, pnombre in fila_profs:
+                if any(p == pid for p, _ in profesores_por_curso[curso]):
+                    raise ValueError(
+                        f"Fila {i}: profesor_id {pid} repetido para '{curso}'."
+                    )
+                profesores_por_curso[curso].append((pid, pnombre))
         else:
             cursos[curso] = {
                 'alumnos': alumnos,
                 'bloques': bloques,
             }
             salas_por_curso[curso] = salas_set
-            profesores_por_curso[curso] = [(prof_id, nombre_prof)]
-            if prof_id in profesores and profesores[prof_id] != nombre_prof:
+            profesores_por_curso[curso] = list(fila_profs)
+
+        # Registrar todos los profesores de esta fila
+        for pid, pnombre in fila_profs:
+            if pid in profesores and profesores[pid] != pnombre:
                 raise ValueError(
-                    f"Fila {i}: profesor_id {prof_id} ya existe con nombre "
-                    f"'{profesores[prof_id]}', no puede ser '{nombre_prof}'."
+                    f"Fila {i}: profesor_id {pid} ya existe con nombre "
+                    f"'{profesores[pid]}', no puede ser '{pnombre}'."
                 )
-            profesores[prof_id] = nombre_prof
+            profesores[pid] = pnombre
 
     C = sorted(cursos.keys())
     P = sorted(profesores.keys())

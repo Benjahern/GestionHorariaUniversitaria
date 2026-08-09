@@ -40,7 +40,7 @@ def visualizar(asignacion, datos):
         fila = f"{Salas[r]:<12}"
         for t in T:
             curso = grilla.get((t, r))
-            fila += f"{(curso if curso else '—'):<18}"
+            fila += f"{(curso if curso else '-'):<18}"
         print(fila)
 
     print()
@@ -48,14 +48,17 @@ def visualizar(asignacion, datos):
     for c in sorted(asignacion.keys()):
         if not asignacion[c]:
             continue
-        prof_id = next(
-            (p for p, cursos in datos['C_p'].items() if c in cursos), None
-        )
-        prof_nombre = Profe.get(prof_id, "?") if prof_id is not None else "?"
+        # Reunir todos los profesores del curso
+        profs_del_curso = [
+            Profe.get(p, f"Prof {p}")
+            for p, cursos_p in datos['C_p'].items()
+            if c in cursos_p
+        ]
+        prof_nombre = ' / '.join(profs_del_curso) if profs_del_curso else '?'
         for (b, r) in asignacion[c]:
             dia, horario = bloque_a_horario(b)
             print(f"  {c} ({Alum[c]} alumnos, prof. {prof_nombre}): "
-                  f"{dia} {horario} → {Salas[r]} (cap {Cap[r]})")
+                  f"{dia} {horario} -> {Salas[r]} (cap {Cap[r]})")
 
 
 def guardar_csv(asignacion, datos, ruta):
@@ -69,15 +72,15 @@ def guardar_csv(asignacion, datos, ruta):
     Profe = datos['Profe']
     C_p = datos['C_p']
 
-    # Mapa curso -> nombre del profesor
+    # Mapa curso -> nombres de profesores (puede haber varios)
     curso_a_profe = {}
-    for p, cursos in C_p.items():
-        for c in cursos:
-            curso_a_profe[c] = Profe.get(p, f"Prof {p}")
+    for p, cursos_p in C_p.items():
+        for c in cursos_p:
+            curso_a_profe.setdefault(c, []).append(Profe.get(p, f"Prof {p}"))
 
     filas = []
     for c in sorted(asignacion.keys()):
-        prof_nombre = curso_a_profe.get(c, "")
+        prof_nombre = ' / '.join(curso_a_profe.get(c, ['']))
         for (b, r) in asignacion[c]:
             dia, horario = bloque_a_horario(b)
             filas.append({
@@ -105,7 +108,7 @@ if __name__ == "__main__":
     from resolv import resolver
 
     datos = cargar('instancias/ejemplo.csv')
-    _, _, asignacion = resolver(datos)
+    _, _, asignacion, _ = resolver(datos)
     visualizar(asignacion, datos)
     guardar_csv(asignacion, datos, 'output/ejemplo.csv')
     print("\nCSV guardado en output/ejemplo.csv")

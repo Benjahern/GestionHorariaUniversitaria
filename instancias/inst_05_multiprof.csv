@@ -1,0 +1,7 @@
+curso,bloques,alumnos,profesor_id,nombre_profesor,salas_disponibles
+Algoritmos,2,20,"1|3","Victor Parada|Carlos Soto","4,5,6,7"
+Bases_de_Datos,2,18,"2|4","Maria Lopez|Ana Torres","4,5,6,7"
+Redes,1,25,"1|5","Victor Parada|Pedro Gonzalez","4,6,7"
+Programacion,2,15,"3|6","Carlos Soto|Luis Martinez","4,5,6,7"
+Ingenieria_Software,2,22,"2|5","Maria Lopez|Pedro Gonzalez","4,5,6,7"
+Ciberseguridad,1,10,"4|6","Ana Torres|Luis Martinez","1,2,3"

@@ -1,0 +1,9 @@
+curso,bloques,alumnos,profesor_id,nombre_profesor,salas_disponibles
+Algoritmos,4,25,1,Victor Parada,"4,5,6,7"
+Bases_de_Datos,3,20,2,Maria Lopez,"4,5,6,7"
+Redes,3,28,3,Carlos Soto,"4,6,7"
+Programacion,4,18,4,Ana Torres,"4,5,6,7"
+Sistemas_Operativos,3,22,5,Pedro Gonzalez,"4,5,6,7"
+Ingenieria_Software,3,15,6,Luis Martinez,"4,5,6,7"
+Calculo_I,4,30,7,Roberto Diaz,"4,6,7,8"
+Estadistica,3,25,8,Carmen Ruiz,"4,5,6,7,8"

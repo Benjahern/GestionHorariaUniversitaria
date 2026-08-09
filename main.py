@@ -58,11 +58,11 @@ def main():
     print()
 
     # 2. Resolver
-    _, _, asignacion = resolver(datos, time_limit=args.time_limit)
+    _, _, asignacion, _ = resolver(datos, time_limit=args.time_limit)
 
     # 3. Verificar
     cumple, errores = verificar(asignacion, datos)
-    print(f"\nVerificación: {'✓ FACTIBLE' if cumple else '✗ NO FACTIBLE'}")
+    print(f"\nVerificacion: {'OK FACTIBLE' if cumple else 'X NO FACTIBLE'}")
     if errores:
         for e in errores:
             print(f"  - {e}")
