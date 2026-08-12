@@ -18,7 +18,7 @@ from instancias.parser import cargar
 from Modelos.modelo import crear_modelo
 from resolv import resolver, obtener_solver
 from verificar import verificar
-from print import visualizar, guardar_csv
+from print import visualizar, guardar_csv, guardar_html
 
 
 def main():
@@ -76,6 +76,11 @@ def main():
     ruta_csv = os.path.join(args.out_dir, f"{nombre}.csv")
     guardar_csv(asignacion, datos, ruta_csv)
     print(f"\nCSV guardado en {ruta_csv}")
+
+    # 6. Exportar HTML (grilla semanal por profesor)
+    ruta_html = os.path.join(args.out_dir, f"{nombre}.html")
+    guardar_html(asignacion, datos, ruta_html)
+    print(f"HTML guardado en {ruta_html}")
 
     return 0 if cumple else 2
 
