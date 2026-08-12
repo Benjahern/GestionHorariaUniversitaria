@@ -87,7 +87,8 @@ todos los CSVs de instancia.
   <header>
     <h1>Horario: <nombre_instancia></h1>
     <div class="meta">
-      N cursos · N salas · N profesores · costo total X
+      {len(C)} cursos · {len(R)} salas · {len(P)} profesores ·
+      costo total {sum_costo}
     </div>
     <div class="controls">
       <label for="filtro-prof">Filtrar:</label>
@@ -213,11 +214,17 @@ document.getElementById('filtro-prof').addEventListener('change', (e) => {
     'Alum': dict[str, int],        # curso -> alumnos
     'Profe': dict[int, str],       # prof_id -> nombre
     'C_p': dict[int, list[str]],   # prof_id -> [cursos]
+    'Costo': dict[(str, int, int), float],  # para "costo total" del meta
 }
 ```
 
 Y el argumento `asignacion: dict[str, list[tuple[int, int]]]`
 (misma forma que recibe `guardar_csv`).
+
+**Costo total del meta:** se computa en `guardar_html` sumando
+`datos['Costo'][(c, t, r)]` para cada `(t, r)` en `asignacion[c]`. No
+se pasa `pulp.value(prob.objective)` desde `main.py` — la función es
+autocontenida.
 
 ## Datos escritos al HTML (output)
 
@@ -254,10 +261,11 @@ El proyecto no tiene test suite, no se agrega una para esta feature
    from resolv import resolver
    from print import guardar_html
 
+   ruta = '/tmp/test_horario.html'
+
+   # Caso normal
    datos = cargar('instancias/ejemplo.csv')
    _, _, asignacion, _ = resolver(datos)
-
-   ruta = '/tmp/test_horario.html'
    guardar_html(asignacion, datos, ruta)
 
    with open(ruta, 'r', encoding='utf-8') as f:
@@ -270,13 +278,24 @@ El proyecto no tiene test suite, no se agrega una para esta feature
        assert curso in html, f"Falta curso {curso}"
    assert html.count('<script') == 1, "Debería haber exactamente un <script>"
 
-   # XSS escaping
-   datos['C'] = ['<script>alert(1)</script>']
-   datos['Alum']['<script>alert(1)</script>'] = 10
-   datos['D']['<script>alert(1)</script>'] = 1
-   guardar_html({'<script>alert(1)</script>': []}, datos, ruta)
+   # XSS escaping: curso con nombre malicioso + asignación real
+   curso_malo = '<script>alert(1)</script>'
+   datos_xss = {
+       'nombre': 'xss_test',
+       'T': [1],
+       'C': [curso_malo],
+       'Salas': {1: 'Sala-Test'},
+       'Cap': {1: 30},
+       'Alum': {curso_malo: 10},
+       'Profe': {99: 'Profe-Test'},
+       'C_p': {99: [curso_malo]},
+       'Costo': {(curso_malo, 1, 1): 1.0},
+   }
+   guardar_html({curso_malo: [(1, 1)]}, datos_xss, ruta)
+
    with open(ruta, 'r', encoding='utf-8') as f:
        html = f.read()
+
    assert '<script>alert(1)</script>' not in html
    assert '&lt;script&gt;alert(1)&lt;/script&gt;' in html
    ```
