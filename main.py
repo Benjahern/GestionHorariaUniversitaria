@@ -6,19 +6,34 @@ Uso:
 
 El CSV lista los CURSOS (una fila por curso, con sus salas permitidas). El
 programa genera todas las combinaciones (curso, bloque, sala) factibles,
-construye el modelo, lo resuelve, verifica la asignación contra las
-restricciones, la imprime como tabla y la exporta a output/<nombre>.csv.
+construye el modelo, lo resuelve, verifica la asignación y exporta:
+
+- output/<nombre>.csv  (una fila por sesión)
+- output/<nombre>.html (grilla semanal por profesor)
+
+En ejecución normal imprime solo:
+    ✓ Revise el HTML en output/<nombre>.html
+
+Si la verificación falla, los errores van a stderr (no se silencia la
+información crítica).
 """
 
 import argparse
+import contextlib
+import io
 import os
 import sys
 
 from instancias.parser import cargar
-from Modelos.modelo import crear_modelo
-from resolv import resolver, obtener_solver
+from resolv import resolver
 from verificar import verificar
-from print import visualizar, guardar_csv, guardar_html
+from print import guardar_csv, guardar_html
+
+
+def _silenciar_stdout():
+    """Redirige stdout a un buffer descartable. Para silenciar el output
+    verboso de módulos externos (ej. resolv.py) sin perder stderr."""
+    return contextlib.redirect_stdout(io.StringIO())
 
 
 def main():
@@ -35,7 +50,7 @@ def main():
     )
     p.add_argument(
         '--out-dir', default='output',
-        help='Carpeta donde escribir el CSV de salida (default: output).',
+        help='Carpeta donde escribir el CSV y HTML (default: output).',
     )
     args = p.parse_args()
 
@@ -47,42 +62,41 @@ def main():
         return 1
 
     nombre = datos['nombre']
-    print("=" * 60)
-    print(f"  {nombre}")
-    print("=" * 60)
-    print(f"Cursos: {datos['C']}")
-    print(f"Salas: {datos['Salas']} (capacidades: {datos['Cap']})")
-    print(f"Profesores: {datos['Profe']}")
-    print(f"Variables de costo (combinaciones factibles): "
-          f"{len(datos['Costo'])}")
-    print()
 
-    # 2. Resolver
-    _, _, asignacion, _ = resolver(datos, time_limit=args.time_limit)
+    # 2. Resolver (silencioso: solver output no es relevante en CLI)
+    try:
+        with _silenciar_stdout():
+            _, _, asignacion, _ = resolver(datos, time_limit=args.time_limit)
+    except Exception as e:
+        print(f"Error al resolver: {e}", file=sys.stderr)
+        return 2
 
     # 3. Verificar
     cumple, errores = verificar(asignacion, datos)
-    print(f"\nVerificacion: {'OK FACTIBLE' if cumple else 'X NO FACTIBLE'}")
-    if errores:
+    if not cumple:
+        print(
+            f"Verificación NO factible ({len(errores)} error(es)):",
+            file=sys.stderr,
+        )
         for e in errores:
-            print(f"  - {e}")
+            print(f"  - {e}", file=sys.stderr)
 
-    # 4. Visualizar
-    print()
-    visualizar(asignacion, datos)
-
-    # 5. Exportar CSV
+    # 4. Exportar CSV
     os.makedirs(args.out_dir, exist_ok=True)
     ruta_csv = os.path.join(args.out_dir, f"{nombre}.csv")
     guardar_csv(asignacion, datos, ruta_csv)
-    print(f"\nCSV guardado en {ruta_csv}")
 
-    # 6. Exportar HTML (grilla semanal por profesor)
+    # 5. Exportar HTML (grilla semanal por profesor)
     ruta_html = os.path.join(args.out_dir, f"{nombre}.html")
     guardar_html(asignacion, datos, ruta_html)
-    print(f"HTML guardado en {ruta_html}")
 
-    return 0 if cumple else 2
+    # 6. Mensaje final (lo unico que ve el usuario en consola si todo OK)
+    if cumple:
+        print(f"✓ Revise el HTML en {ruta_html}")
+        return 0
+    else:
+        print(f"HTML guardado en {ruta_html}")
+        return 2
 
 
 if __name__ == "__main__":
