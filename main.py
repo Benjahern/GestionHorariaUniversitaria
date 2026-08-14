@@ -68,10 +68,7 @@ def main():
     # 2. Resolver (silencioso: solver output no es relevante en CLI)
     try:
         with _silenciar_stdout():
-            start_time = time.time()
-            prob, _, asignacion, _ = resolver(datos, time_limit=args.time_limit)
-            end_time = time.time()
-            tiempo_resolucion = end_time - start_time
+            prob, _, asignacion, tiempo = resolver(datos, time_limit=args.time_limit)
             valor_objetivo = pulp.value(prob.objective)
             num_variables = len(prob.variables())
             num_restricciones = len(prob.constraints)
@@ -101,14 +98,14 @@ def main():
     # 6. Mensaje final (lo unico que ve el usuario en consola si todo OK)
     if cumple:
         print(f"✓ Revise el HTML en {ruta_html}")
-        print(f"Tiempo de resolución: {tiempo_resolucion:.2f} segundos")
+        print(f"Tiempo de resolución: {tiempo:.2f} segundos")
         print(f"Valor de la función objetivo (Costo total): {valor_objetivo}")
         print(f"Variables: {num_variables}")
         print(f"Restricciones: {num_restricciones}")
         return 0
     else:
         print(f"HTML guardado en {ruta_html}")
-        print(f"Tiempo de resolución: {tiempo_resolucion:.2f} segundos")
+        print(f"Tiempo de resolución: {tiempo:.2f} segundos")
         print(f"Valor de la función objetivo (Costo total): {valor_objetivo}")
         print(f"Variables: {num_variables}")
         print(f"Restricciones: {num_restricciones}")
