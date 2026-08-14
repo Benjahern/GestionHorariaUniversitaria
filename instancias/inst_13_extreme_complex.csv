@@ -1,0 +1,126 @@
+curso,bloques,alumnos,profesor_id,nombre_profesor,salas_disponibles
+Introduccion_a_la_Ingenieria,2,95,1,Victor Parada,10
+Fisica_General_I,2,90,2,Maria Lopez,10
+Calculo_General_I,2,100,3,Carlos Soto,10
+Quimica_General_I,2,85,4|15|23,Ana Torres|Patricia Bravo|Daniela Mendoza,10
+Algebra_Lineal_Magna,2,90,5,Pedro Gonzalez,10
+Introduccion_a_la_Ingenieria_Sec2,2,95,6,Luis Martinez,10
+Fisica_General_I_Sec2,2,90,7,Roberto Diaz,10
+Calculo_General_I_Sec2,2,100,8,Carmen Ruiz,10
+Quimica_General_I_Sec2,2,85,9|20,Diego Ramirez|Gonzalo Navarro,10
+Algebra_Lineal_Magna_Sec2,2,90,10,Elena Vargas,10
+Economia_General_Auditorio,2,80,11,Sofia Rojas,10
+Etica_y_Sociedad_Auditorio,2,75,12,Francisco Silva,10
+Liderazgo_Magistral,2,70,13,Loreto Araya,10
+Lab_Algoritmos_A,2,10,14|25|1,Jorge Mella|Javier Espinoza|Victor Parada,"1,2"
+Lab_Algoritmos_B,2,10,15,Patricia Bravo,"1,2"
+Lab_Sistemas_Operativos_A,2,10,16,Gabriel Fuentes,"1,2"
+Lab_Sistemas_Operativos_B,2,10,17,Claudia Morales,"1,2"
+Lab_Redes_A,2,10,18,Fernando Castro,"1,2"
+Lab_Redes_B,2,10,19|30,Valentina Ortiz|Isabel Carvajal,"1,2"
+Lab_Bases_Datos_A,2,10,20,Gonzalo Navarro,"1,2"
+Lab_Bases_Datos_B,2,10,21,Camila Reyes,"1,2"
+Lab_Hardware_A,2,10,22,Sebastian Godoy,"1,2"
+Lab_Hardware_B,2,10,23,Daniela Mendoza,"1,2"
+Lab_Programacion_Baja_Nivel_A,2,10,24|3|11,Marcelo Paredes|Carlos Soto|Sofia Rojas,"1,2"
+Lab_Programacion_Baja_Nivel_B,2,10,25,Javier Espinoza,"1,2"
+Lab_Ensamblador_A,2,10,26,Natalia Salgado,"1,2"
+Lab_Ensamblador_B,2,10,27,Rodrigo Guzman,"1,2"
+Lab_Ciberseguridad_Practico_A,2,10,28,Andrea Sepulveda,"1,2"
+Lab_Ciberseguridad_Practico_B,2,10,29|8,Hernan Pinto|Carmen Ruiz,"1,2"
+Lab_Robotica_Movil_A,2,10,30,Isabel Carvajal,"1,2"
+Lab_Robotica_Movil_B,2,10,31,Tomas Aguilera,"1,2"
+Lab_Embebidos_A,2,10,32,Monica Fuentes,"1,2"
+Lab_Embebidos_B,2,10,1,Victor Parada,"1,2"
+Taller_Tesis_Computacional_A,2,10,2|13|21,Maria Lopez|Loreto Araya|Camila Reyes,"1,2"
+Taller_Tesis_Computacional_B,2,10,3,Carlos Soto,"1,2"
+Lab_IA_DeepLearning_A,2,10,4,Ana Torres,"1,2"
+Lab_IA_DeepLearning_B,2,10,5,Pedro Gonzalez,"1,2"
+Lab_Computacion_Grafica,2,10,6,Luis Martinez,"1,2"
+Lab_TIC_Redes_Avanzadas,2,18,7|18,Roberto Diaz|Fernando Castro,3
+Lab_TIC_Telecomunicaciones,2,20,8,Carmen Ruiz,3
+Lab_TIC_IoT_Avanzado,2,19,9,Diego Ramirez,3
+Lab_TIC_Servidores_Nube,2,18,10,Elena Vargas,3
+Lab_TIC_Seguridad_Perimetral,2,20,11,Sofia Rojas,3
+Lab_TIC_Forense_Digital,2,17,12|23|31,Francisco Silva|Daniela Mendoza|Tomas Aguilera,3
+Lab_TIC_Telefonía_IP,2,18,13,Loreto Araya,3
+Lab_TIC_Virtualizacion,2,20,14,Jorge Mella,3
+Lab_TIC_Sistemas_Distribuidos,2,19,15,Patricia Bravo,3
+Lab_TIC_BigData_Practico,2,18,16,Gabriel Fuentes,3
+Lab_TIC_Procesamiento_Senales,2,20,17|28,Claudia Morales|Andrea Sepulveda,3
+Lab_TIC_Computacion_Paralela,2,19,18,Fernando Castro,3
+Programacion_I_Sec1,2,25,19,Valentina Ortiz,"4,5"
+Programacion_I_Sec2,2,25,20,Gonzalo Navarro,"4,5"
+Programacion_I_Sec3,2,24,21,Camila Reyes,"4,5"
+Programacion_II_Sec1,2,25,22|1|9,Sebastian Godoy|Victor Parada|Diego Ramirez,"4,5"
+Programacion_II_Sec2,2,25,23,Daniela Mendoza,"4,5"
+Estructura_Datos_Sec1,2,25,24,Marcelo Paredes,"4,5"
+Estructura_Datos_Sec2,2,25,25,Javier Espinoza,"4,5"
+POO_Avanzada_Sec1,2,25,26,Natalia Salgado,"4,5"
+POO_Avanzada_Sec2,2,25,27|6,Rodrigo Guzman|Luis Martinez,"4,5"
+Analisis_Algoritmos_Sec1,2,25,28,Andrea Sepulveda,"4,5"
+Analisis_Algoritmos_Sec2,2,25,29,Hernan Pinto,"4,5"
+Ingenieria_Requisitos_Sec1,2,25,30,Isabel Carvajal,"4,5"
+Ingenieria_Requisitos_Sec2,2,25,31,Tomas Aguilera,"4,5"
+Arquitectura_Software_Sec1,2,25,32|11|19,Monica Fuentes|Sofia Rojas|Valentina Ortiz,"4,5"
+Arquitectura_Software_Sec2,2,25,1,Victor Parada,"4,5"
+Pruebas_Software_Sec1,2,25,2,Maria Lopez,"4,5"
+Pruebas_Software_Sec2,2,25,3,Carlos Soto,"4,5"
+Diseno_UX_UI_Sec1,2,23,4,Ana Torres,"4,5"
+Diseno_UX_UI_Sec2,2,24,5|16,Pedro Gonzalez|Gabriel Fuentes,"4,5"
+Gestion_Agil_Sec1,2,25,6,Luis Martinez,"4,5"
+Gestion_Agil_Sec2,2,25,7,Roberto Diaz,"4,5"
+Sistemas_Informacion_Sec1,2,25,8,Carmen Ruiz,"4,5"
+Sistemas_Informacion_Sec2,2,25,9,Diego Ramirez,"4,5"
+Taller_Desarrollo_Web_Sec1,2,25,10|21|29,Elena Vargas|Camila Reyes|Hernan Pinto,"4,5"
+Taller_Desarrollo_Web_Sec2,2,25,11,Sofia Rojas,"4,5"
+Bases_Datos_I_Sec1,2,30,12,Francisco Silva,"6,7"
+Bases_Datos_I_Sec2,2,30,13,Loreto Araya,"6,7"
+Sistemas_Operativos_I_Sec1,2,30,14,Jorge Mella,"6,7"
+Sistemas_Operativos_I_Sec2,2,30,15|26,Patricia Bravo|Natalia Salgado,"6,7"
+Redes_I_Sec1,2,30,16,Gabriel Fuentes,"6,7"
+Redes_I_Sec2,2,30,17,Claudia Morales,"6,7"
+Teoria_Computacion_I_Sec1,2,30,18,Fernando Castro,"6,7"
+Teoria_Computacion_I_Sec2,2,30,19,Valentina Ortiz,"6,7"
+Compiladores_I_Sec1,2,28,20|31|7,Gonzalo Navarro|Tomas Aguilera|Roberto Diaz,"6,7"
+Compiladores_I_Sec2,2,29,21,Camila Reyes,"6,7"
+Optimizacion_I_Sec1,2,30,22,Sebastian Godoy,"6,7"
+Optimizacion_I_Sec2,2,30,23,Daniela Mendoza,"6,7"
+Inteligencia_Artificial_I_Sec1,2,30,24,Marcelo Paredes,"6,7"
+Inteligencia_Artificial_I_Sec2,2,30,25|4,Javier Espinoza|Ana Torres,"6,7"
+Seguridad_I_Sec1,2,30,26,Natalia Salgado,"6,7"
+Seguridad_I_Sec2,2,30,27,Rodrigo Guzman,"6,7"
+Modelos_Estocasticos_Sec1,2,30,28,Andrea Sepulveda,"6,7"
+Modelos_Estocasticos_Sec2,2,30,29,Hernan Pinto,"6,7"
+Estadistica_Inferencial_Sec1,2,30,30|9|17,Isabel Carvajal|Diego Ramirez|Claudia Morales,"6,7"
+Estadistica_Inferencial_Sec2,2,30,31,Tomas Aguilera,"6,7"
+Economia_Industrial_Sec1,2,30,32,Monica Fuentes,"6,7"
+Economia_Industrial_Sec2,2,30,1,Victor Parada,"6,7"
+Finanzas_1_Sec1,2,30,2,Maria Lopez,"6,7"
+Finanzas_1_Sec2,2,30,3|14,Carlos Soto|Jorge Mella,"6,7"
+Taller_Capstone_Fase1,2,30,4,Ana Torres,"6,7"
+Calculo_II_Sec1,2,60,5,Pedro Gonzalez,"8,9"
+Calculo_II_Sec2,2,60,6,Luis Martinez,"8,9"
+Calculo_II_Sec3,2,58,7,Roberto Diaz,"8,9"
+Fisica_II_Sec1,2,60,8|19|27,Carmen Ruiz|Valentina Ortiz|Rodrigo Guzman,"8,9"
+Fisica_II_Sec2,2,60,9,Diego Ramirez,"8,9"
+Fisica_II_Sec3,2,55,10,Elena Vargas,"8,9"
+Algebra_Lineal_Sec1,2,60,11,Sofia Rojas,"8,9"
+Algebra_Lineal_Sec2,2,60,12,Francisco Silva,"8,9"
+Algebra_Lineal_Sec3,2,58,13|24,Loreto Araya|Marcelo Paredes,"8,9"
+Ecuaciones_Diferenciales_Sec1,2,60,14,Jorge Mella,"8,9"
+Ecuaciones_Diferenciales_Sec2,2,60,15,Patricia Bravo,"8,9"
+Ecuaciones_Diferenciales_Sec3,2,55,16,Gabriel Fuentes,"8,9"
+Probabilidades_Sec1,2,60,17,Claudia Morales,"8,9"
+Probabilidades_Sec2,2,60,18|29|5,Fernando Castro|Hernan Pinto|Pedro Gonzalez,"8,9"
+Estadistica_General_Sec1,2,60,19,Valentina Ortiz,"8,9"
+Estadistica_General_Sec2,2,60,20,Gonzalo Navarro,"8,9"
+Quimica_Aplicada_Sec1,2,55,21,Camila Reyes,"8,9"
+Quimica_Aplicada_Sec2,2,58,22,Sebastian Godoy,"8,9"
+Mecanica_Racional_Sec1,2,60,23|2,Daniela Mendoza|Maria Lopez,"8,9"
+Mecanica_Racional_Sec2,2,60,24,Marcelo Paredes,"8,9"
+Termodinamica_Sec1,2,60,25,Javier Espinoza,"8,9"
+Termodinamica_Sec2,2,55,26,Natalia Salgado,"8,9"
+Electromagnetismo_Sec1,2,60,27,Rodrigo Guzman,"8,9"
+Electromagnetismo_Sec2,2,60,28|7|15,Andrea Sepulveda|Roberto Diaz|Patricia Bravo,"8,9"
+Introduccion_Economia_Sec1,2,60,29,Hernan Pinto,"8,9"
